@@ -122,7 +122,7 @@
 
   /* ── Nav ── */
   .nav {
-    padding: 20px 0;
+    padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -202,7 +202,7 @@
 
   /* ── Hero ── */
   .hero {
-    padding: 120px 0 70px;
+    padding: 100px 0 60px;
     position: relative;
     overflow: hidden;
   }
@@ -244,7 +244,7 @@
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--yellow);
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -275,7 +275,7 @@
     50% { transform: scale(1.4); opacity: 0.4; }
   }
   .hero-headline {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
   .hero-headline .line {
     display: block;
@@ -285,11 +285,11 @@
     color: var(--yellow);
   }
   .hero-sub {
-    font-size: 13px;
-    line-height: 1.7;
+    font-size: 12px;
+    line-height: 1.6;
     color: var(--ink-soft);
-    margin-bottom: 32px;
-    max-width: 400px;
+    margin-bottom: 20px;
+    max-width: 380px;
   }
   .hero-cta-row {
     display: flex;
@@ -1023,15 +1023,11 @@
     <div class="hero-grid">
       <div class="hero-left">
         <div class="hero-eyebrow">Digital Marketing · Hong Kong</div>
-        <h1 class="display-hero hero-headline">
-          <span class="line">Craftsmen</span>
-          <span class="line"> get</span>
-          <span class="line accent"> customers</span>
-          <span class="line"> online.</span>
-        </h1>
-        <p class="hero-sub">
-          Exposure Lab builds digital growth systems for HK's visual and craft businesses — Instagram that becomes a lead channel, Meta ads that work, funnels that turn followers into customers.
-        </p>
+        <div class="hero-hook">
+          <span class="hook-line">Craftsmen.</span>
+          <span class="hook-line hook-accent">Get customers</span>
+          <span class="hook-line hook-accent">online.</span>
+        </div>
         <div class="hero-cta-row">
           <a href="#contact" class="btn-primary">
             Start your glowup <span class="arrow">→</span>
@@ -1040,6 +1036,9 @@
             See the work
           </a>
         </div>
+        <p class="hero-sub">
+          Instagram that becomes a lead channel. Meta ads that work. Funnels that turn followers into customers — built for HK craft businesses.
+        </p>
       </div>
       <div class="hero-right">
         <div class="hero-image-stack">
