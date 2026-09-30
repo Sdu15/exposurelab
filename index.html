@@ -66,15 +66,15 @@
     text-transform: uppercase;
   }
 
-  /* ── Hero hook (restructured: tighter, CTA-connected) ── */
+  /* ── Hero hook ── */
   .hero-hook {
-    font-family: var(--stencil);
-    font-size: clamp(52px, 10vw, 128px);
+    font-family: var(--shrikhand);
+    font-size: clamp(44px, 8vw, 100px);
     font-weight: 400;
     letter-spacing: -0.03em;
-    line-height: 0.88;
+    line-height: 0.9;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .hook-line {
     display: block;
@@ -103,8 +103,9 @@
     line-height: 0.9;
   }
   .display-md {
-    font-size: clamp(24px, 4vw, 60px);
-    font-weight: 700;
+    font-family: var(--shrikhand);
+    font-size: clamp(24px, 3.5vw, 56px);
+    font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 0.95;
   }
@@ -989,6 +990,7 @@
     .nav-links { display: none; }
     .nav-cta { display: none; }
     .section { padding: 60px 0; }
+    .display-sm { font-size: clamp(13px, 3vw, 26px); }
   }
   @media (max-width: 600px) {
     .work-grid { grid-template-columns: 1fr; }
@@ -997,14 +999,17 @@
     .services-grid { grid-template-columns: 1fr; }
     .service-card-accent { grid-column: span 1; }
     .stats-grid { grid-template-columns: 1fr; }
-    .stats-grid .stat-cell { border-bottom: 2px solid var(--teal); }
+    .stats-grid .stat-cell { border-bottom: 1px solid var(--border); }
     .stats-grid .stat-cell:nth-child(2) { border-right: none; }
     .nav-right { gap: 12px; }
     .nav-links, .nav-cta { display: none; }
     .hero-headline .line { display: block; }
-    .cta-banner-bg-text { font-size: 100px; }
-    .split-right .sr-list li { padding: 10px 0; }
-    .final-cta-grid { display: none; }
+    .split-right .label { margin-bottom: 12px; }
+    .cta-banner-content { flex-direction: column; align-items: flex-start; }
+    .cta-banner-cta { flex-direction: column; align-items: flex-start; }
+    .display-sm { font-size: clamp(13px, 4vw, 22px); }
+    .container { padding: 0 16px; --gutter: 16px; }
+    .section, .section-sm { padding: 48px 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1036,7 +1041,6 @@
 
 <!-- ── Hero ── -->
 <section class="hero">
-  <div class="hero-grid-bg"></div>
   <div class="container hero-content">
     <div class="hero-grid">
       <div class="hero-left">
@@ -1059,34 +1063,30 @@
         </p>
       </div>
       <div class="hero-right">
-        <div class="hero-image-stack">
-          <div class="hero-main-image">
-            <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=700&q=80" alt="Craft workshop" loading="eager">
-          </div>
-          <div class="hero-orange-frame"></div>
-          <div class="hero-float">
-            <div class="hf-num">4.2×</div>
-            <div class="hf-label">Growth · 8 weeks</div>
-            <div class="hf-desc">Photography shop · followers + 23 orders</div>
-          </div>
-          <div class="hero-image-accent">
-            <div class="ia-label">Photography Supply Co.</div>
-            <div class="ia-value">8 weeks · 1 client</div>
-          </div>
+        <div class="hero-image-main">
+          <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=700&q=80" alt="Craft workshop" loading="eager">
+        </div>
+        <div class="hero-float">
+          <div class="hf-num">4.2×</div>
+          <div class="hf-label">Growth · 8 weeks</div>
+          <div class="hf-desc">Photography shop · followers + 23 orders</div>
         </div>
       </div>
     </div>
 
-    <!-- CTA Banner -->
+    <!-- CTA Strip -->
     <div class="cta-banner">
-      <div class="cta-banner-bg-text">PILOT<br>CLIENTS</div>
-      <div class="container cta-banner-inner">
-        <div class="label">Open for pilots</div>
-        <h2>2–3 pilot clients.<br>This month. Only.</h2>
-        <p>Photography, tailoring, cafes, fashion, makers — HK craft businesses whose digital presence doesn't match their craft. First engagement at pilot rate.</p>
-        <a href="mailto:hello@exposurelab.hk" class="cta-banner-btn">
-          Book a call <span class="arrow">→</span>
-        </a>
+      <div class="container cta-banner-content">
+        <div class="cta-banner-text">
+          <span class="cta-banner-num">Open for pilots</span>
+          <h2>2–3 pilot clients.<br>This month. Only.</h2>
+          <p>Photography, tailoring, cafes, fashion, makers — HK craft businesses whose digital presence doesn't match their craft. First engagement at pilot rate.</p>
+        </div>
+        <div class="cta-banner-cta">
+          <a href="mailto:hello@exposurelab.hk" class="cta-banner-btn">
+            Book a call <span class="arrow">→</span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -1254,7 +1254,6 @@
 
 <!-- ── Final CTA ── -->
 <section class="final-cta" id="contact">
-  <div class="final-cta-grid"></div>
   <div class="container final-cta-inner">
     <div class="label">Open for pilot clients</div>
     <h2>Got a craft business<br>that needs a glowup?</h2>
@@ -1358,7 +1357,7 @@
   }
 
   // ── Hero image: subtle slow zoom (no rotation — cheaper on GPU) ──
-  const heroImg = document.querySelector('.hero-main-image img');
+  const heroImg = document.querySelector('.hero-image-main img');
   if (heroImg && !isReduced()) {
     gsap.to(heroImg, {
       scale: 1.05,
