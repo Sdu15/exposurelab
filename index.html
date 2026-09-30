@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXPOSURE lab — Acid Yellow Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Saira+Stencil+One:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Tokens ── */
+  :root {
+    --navy: #0a1628;
+    --navy-deep: #060e1c;
+    --navy-alt: #0f1e36;
+    --navy-surface: #142642;
+    --navy-light: #1a3258;
+    --yellow: #f5d142;
+    --yellow-bright: #ffe066;
+    --yellow-bg: rgba(245, 209, 66, 0.12);
+    --yellow-glow: rgba(245, 209, 66, 0.3);
+    --yellow-dim: rgba(245, 209, 66, 0.6);
+    --paper: #f4f3ee;
+    --ink: #f4f3ee;
+    --ink-soft: #9ca3b8;
+    --muted: #5e6678;
+    --border: rgba(244, 243, 238, 0.08);
+    --border-light: rgba(244, 243, 238, 0.03);
+
+    --grotesk: 'Space Grotesk', sans-serif;
+    --stencil: 'Saira Stencil One', cursive;
+    --body: 'Inter', sans-serif;
+
+    --max-w: 1360px;
+    --gutter: 36px;
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Typography ── */
+  h1, h2, h3, h4 {
+    font-family: var(--grotesk);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+  }
+  .display-hero {
+    font-family: var(--stencil);
+    font-size: clamp(68px, 13vw, 200px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 0.85;
+    text-transform: uppercase;
+  }
+  .display-lg {
+    font-size: clamp(44px, 7vw, 112px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .display-md {
+    font-size: clamp(24px, 4vw, 60px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .display-sm {
+    font-size: clamp(16px, 2.5vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .label {
+    font-family: var(--grotesk);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+  .label-neutral { color: var(--ink-soft); }
+  .meta {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .body-text {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 440px;
+  }
+  .body-small {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── Layout ── */
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .section { padding: 96px 0; }
+  .section-sm { padding: 56px 0; }
+
+  /* ── Nav ── */
+  .nav {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6, 14, 28, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-brand {
+    font-family: var(--stencil);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--yellow);
+  }
+  .nav-brand .lab {
+    font-family: var(--grotesk);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    color: var(--ink-soft);
+    margin-left: 2px;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--grotesk);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--yellow);
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 0 24px var(--yellow-glow);
+  }
+  .nav-cta:hover { background: var(--yellow-bright); transform: translateY(-1px); }
+  .nav-cta .arrow { font-size: 11px; color: var(--navy); }
+
+  /* ── Mark (yellow on navy) ── */
+  .mark-yellow {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .mark-yellow svg { display: block; }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 120px 0 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-alt) 100%);
+    z-index: 0;
+  }
+  .hero-grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.4;
+    mask-image: radial-gradient(circle at 30% 40%, black 20%, transparent 70%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .hero-left {}
+  .hero-eyebrow {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: pulse-y 3s ease-in-out infinite;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--yellow);
+  }
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    animation: pulse-dot 3s ease-in-out infinite;
+  }
+  @keyframes pulse-y {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.4; }
+  }
+  .hero-headline {
+    margin-bottom: 16px;
+  }
+  .hero-headline .line {
+    display: block;
+    overflow: hidden;
+  }
+  .hero-headline .line.accent {
+    color: var(--yellow);
+  }
+  .hero-sub {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 400px;
+  }
+  .hero-cta-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--grotesk);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--yellow);
+    padding: 17px 30px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px var(--yellow-glow);
+  }
+  .btn-primary:hover { background: var(--yellow-bright); transform: translateY(-2px); box-shadow: 0 8px 32px var(--yellow-glow); }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(5px); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--grotesk);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    border: 1.5px solid var(--yellow-dim);
+    padding: 15px 26px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--yellow); background: var(--yellow-bg); }
+
+  .hero-right {
+    position: relative;
+  }
+  .hero-image-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 460px;
+  }
+  .hero-main-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .hero-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(1.1);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hero-main-image:hover img { transform: scale(1.03); }
+  /* Yellow frame overlay */
+  .hero-yellow-frame {
+    position: absolute;
+    bottom: -32px;
+    right: -32px;
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border: 3px solid var(--yellow);
+    box-shadow: 0 0 0 4px var(--navy), 0 0 40px var(--yellow-glow);
+    z-index: 2;
+    pointer-events: none;
+  }
+  /* Floating card */
+  .hero-float {
+    position: absolute;
+    top: 24px;
+    right: -20px;
+    width: 170px;
+    background: var(--navy-surface);
+    border: 1px solid var(--yellow-dim);
+    border-radius: 4px;
+    padding: 14px 16px;
+    z-index: 3;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .hero-float .hf-num {
+    font-family: var(--stencil);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--yellow);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hero-float .hf-label {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .hero-float .hf-desc {
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  /* Yellow accent bar on image */
+  .hero-image-accent {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: var(--navy-surface);
+    border-left: 3px solid var(--yellow);
+    padding: 10px 14px;
+    z-index: 2;
+  }
+  .hero-image-accent .ia-label {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 2px;
+  }
+  .hero-image-accent .ia-value {
+    font-family: var(--stencil);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  /* ── CTA Banner ── */
+  .cta-banner {
+    margin-top: 48px;
+    padding: 50px 0;
+    background: var(--yellow);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner-bg-text {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.08;
+    font-family: var(--stencil);
+    font-size: 200px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--navy);
+    pointer-events: none;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    padding: 40px;
+  }
+  .cta-banner-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .cta-banner .label { color: var(--navy); opacity: 0.7; margin-bottom: 12px; }
+  .cta-banner h2 {
+    font-family: var(--stencil);
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .cta-banner p {
+    font-size: 12px;
+    color: rgba(6, 14, 28, 0.7);
+    max-width: 380px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+  .cta-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--grotesk);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--navy);
+    padding: 16px 30px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+  .cta-banner-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+  .cta-banner-btn .arrow { font-size: 13px; }
+
+  /* ── Stats grid: navy with yellow numbers ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stats-grid .stat-cell {
+    padding: 28px 16px;
+    border-right: 2px solid var(--navy-light);
+    text-align: center;
+  }
+  .stats-grid .stat-cell:last-child { border-right: none; }
+  .stats-grid .stat-cell-num {
+    font-family: var(--stencil);
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--yellow);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    margin-bottom: 4px;
+  }
+  .stats-grid .stat-cell-label {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ── Work: brutal navy grid ── */
+  .work-section { background: var(--navy); }
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .work-header-left .label { margin-bottom: 12px; }
+  .work-header-left h2 {
+    font-size: clamp(24px, 3.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .work-header-left h2 .accent { color: var(--yellow); }
+  .work-header-right {
+    text-align: right;
+    max-width: 260px;
+  }
+  .work-aside {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .work-aside-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .work-aside-item:last-child { border-bottom: none; }
+  .work-aside-item .num { color: var(--yellow); font-weight: 700; }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 300px 220px 220px;
+    gap: 14px;
+  }
+  .work-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--navy-deep);
+    cursor: pointer;
+    border: 1px solid var(--border);
+  }
+  .work-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.6s ease;
+    filter: grayscale(30%) contrast(1.08);
+  }
+  .work-item:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1.12);
+  }
+  .work-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 14, 28, 0.95) 0%, rgba(6, 14, 28, 0.3) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .work-item:hover::after { opacity: 1; }
+  .work-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 16px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .work-item:hover .work-item-overlay { opacity: 1; transform: translateY(0); }
+  .work-item-title {
+    font-family: var(--grotesk);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .work-item-tag {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+  .work-item-aspect-1 { grid-column: span 5; grid-row: span 2; }
+  .work-item-aspect-2 { grid-column: span 4; }
+  .work-item-aspect-3 { grid-column: span 3; }
+
+  /* Yellow block */
+  .work-yellow-block {
+    grid-column: span 3;
+    background: var(--yellow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .work-yellow-block:hover { background: var(--yellow-bright); transform: scale(1.01); }
+  .work-yellow-block .wyb-num {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.5;
+  }
+  .work-yellow-block .wyb-title {
+    font-family: var(--stencil);
+    font-size: clamp(18px, 2.5vw, 36px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    text-transform: uppercase;
+  }
+  .work-yellow-block .wyb-desc {
+    font-size: 11px;
+    color: rgba(6, 14, 28, 0.7);
+    max-width: 180px;
+    line-height: 1.4;
+  }
+  .work-yellow-block .wyb-btn {
+    margin-top: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding-top: 10px;
+    border-top: 1px solid rgba(6, 14, 28, 0.2);
+    width: 100%;
+  }
+  .work-yellow-block:hover .wyb-btn { opacity: 1; }
+
+  .work-link-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  /* ── Services: navy + yellow ── */
+  .services-section { background: var(--navy-alt); }
+  .services-header {
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .services-header .label { margin-bottom: 14px; }
+  .services-header h2 {
+    font-size: clamp(30px, 5vw, 72px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    margin-bottom: 8px;
+  }
+  .services-header p { font-size: 12px; color: var(--ink-soft); max-width: 400px; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .service-card {
+    background: var(--navy-deep);
+    border: 1px solid var(--border);
+    padding: 26px 20px;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: var(--yellow);
+    transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .service-card:hover::before { height: 3px; }
+  .service-card:hover {
+    border-color: var(--yellow-dim);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  .service-card-accent {
+    grid-column: span 2;
+    background: var(--navy);
+    border-color: var(--yellow-dim);
+  }
+  .service-card-accent:hover { border-color: var(--yellow); background: var(--navy-alt); }
+  .service-num {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 10px;
+  }
+  .service-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.0;
+    margin-bottom: 6px;
+  }
+  .service-desc {
+    font-size: 10px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 180px;
+  }
+  .service-card-accent .service-desc { max-width: 320px; }
+
+  /* ── Split section: navy + yellow block ── */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 380px;
+  }
+  .split-left {
+    background: var(--navy);
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .split-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: var(--yellow);
+    opacity: 0.06;
+    border-radius: 50%;
+  }
+  .split-left .label { color: var(--yellow); margin-bottom: 14px; }
+  .split-left h3 {
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.15;
+  }
+  .split-left p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 280px;
+  }
+  .split-right {
+    background: var(--yellow);
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .split-right .sr-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .split-right .sr-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(6, 14, 28, 0.15);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .split-right .sr-list li:last-child { border-bottom: none; }
+  .split-right .sr-list .sr-num {
+    font-family: var(--stencil);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--navy);
+    letter-spacing: -0.03em;
+    flex-shrink: 0;
+  }
+  .split-right .sr-list .sr-text {
+    font-family: var(--grotesk);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+  .split-right .sr-list .sr-text strong { font-weight: 700; }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    padding: 110px 0;
+    background: var(--navy-deep);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .final-cta-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .final-cta-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .final-cta .label { color: var(--yellow); }
+  .final-cta h2 {
+    font-family: var(--stencil);
+    font-size: clamp(44px, 8vw, 112px);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+  .final-cta p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    max-width: 380px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .final-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--grotesk);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    background: var(--navy);
+    padding: 16px 32px;
+    text-decoration: none;
+    border: 1px solid var(--yellow);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+  .final-cta-btn:hover { background: var(--yellow); color: var(--navy); transform: translateY(-2px); }
+  .final-cta-btn .arrow { font-size: 13px; color: var(--navy); }
+  .final-cta-note {
+    margin-top: 14px;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-brand {
+    font-family: var(--stencil);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+  .footer-brand .lab {
+    font-family: var(--grotesk);
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    color: var(--ink-soft);
+    margin-left: 2px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .footer-links a { color: inherit; text-decoration: none; }
+  .footer-links a:hover { color: var(--yellow); }
+
+  /* ── Responsive ── */
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-float { display: none; }
+    .hero-yellow-frame { display: none; }
+    .hero-grid-bg::before { display: none; }
+    .work-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .work-item-aspect-1, .work-item-aspect-2, .work-item-aspect-3 {
+      grid-column: span 1;
+      grid-row: span 1;
+      aspect-ratio: 4 / 3;
+    }
+    .work-yellow-block { grid-column: span 2; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .service-card-accent { grid-column: span 2; }
+    .split-section { grid-template-columns: 1fr; }
+    .split-right { border-top: 1px solid var(--border); }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid .stat-cell { border-right: none; border-bottom: 2px solid var(--navy-light); }
+    .stats-grid .stat-cell:nth-child(2) { border-right: 2px solid var(--navy-light); }
+    .container { padding: 0 24px; --gutter: 24px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .section { padding: 60px 0; }
+  }
+  @media (max-width: 600px) {
+    .work-grid { grid-template-columns: 1fr; }
+    .work-item-aspect-1, .work-item-aspect-2, .work-item-aspect-3 { aspect-ratio: 4 / 3; }
+    .work-yellow-block { grid-column: span 1; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card-accent { grid-column: span 1; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stats-grid .stat-cell { border-bottom: 2px solid var(--navy-light); }
+    .stats-grid .stat-cell:nth-child(2) { border-right: none; }
+    .nav-right { gap: 12px; }
+    .nav-links, .nav-cta { display: none; }
+    .hero-headline .line { display: block; }
+    .cta-banner-bg-text { font-size: 100px; }
+    .split-right .sr-list li { padding: 10px 0; }
+    .final-cta-grid { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-brand">
+      EXPOSURE<span class="lab">lab</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#split">Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="nav-cta">
+        Start a project <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Digital Marketing · Hong Kong</div>
+        <h1 class="display-hero hero-headline">
+          <span class="line">Craftsmen</span>
+          <span class="line"> get</span>
+          <span class="line accent"> customers</span>
+          <span class="line"> online.</span>
+        </h1>
+        <p class="hero-sub">
+          Exposure Lab builds digital growth systems for HK's visual and craft businesses — Instagram that becomes a lead channel, Meta ads that work, funnels that turn followers into customers.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#contact" class="btn-primary">
+            Start your glowup <span class="arrow">→</span>
+          </a>
+          <a href="#work" class="btn-secondary">
+            See the work
+          </a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-image-stack">
+          <div class="hero-main-image">
+            <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=700&q=80" alt="Craft workshop" loading="eager">
+          </div>
+          <div class="hero-yellow-frame"></div>
+          <div class="hero-float">
+            <div class="hf-num">4.2×</div>
+            <div class="hf-label">Growth · 8 weeks</div>
+            <div class="hf-desc">Photography shop · followers + 23 orders</div>
+          </div>
+          <div class="hero-image-accent">
+            <div class="ia-label">Photography Supply Co.</div>
+            <div class="ia-value">8 weeks · 1 client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <div class="cta-banner-bg-text">PILOT<br>CLIENTS</div>
+      <div class="container cta-banner-inner">
+        <div class="label">Open for pilots</div>
+        <h2>2–3 pilot clients.<br>This month. Only.</h2>
+        <p>Photography, tailoring, cafes, fashion, makers — HK craft businesses whose digital presence doesn't match their craft. First engagement at pilot rate.</p>
+        <a href="mailto:hello@exposurelab.hk" class="cta-banner-btn">
+          Book a call <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" style="margin-top:56px;border-top:1px solid var(--border);">
+      <div class="stat-cell">
+        <div class="stat-cell-num">2</div>
+        <div class="stat-cell-label">Portfolio clients</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-num">4.2k</div>
+        <div class="stat-cell-label">Followers grown · 8w</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-num">23</div>
+        <div class="stat-cell-label">Online orders from IG</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-num">312</div>
+        <div class="stat-cell-label">Link clicks · IG funnel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Work ── -->
+<section class="section work-section" id="work">
+  <div class="container">
+    <div class="work-header">
+      <div class="work-header-left">
+        <div class="label">The Work</div>
+        <h2>Two clients.<br>Two trades.<br><span class="accent">One system.</span></h2>
+      </div>
+      <div class="work-header-right">
+        <div class="work-aside">
+          <div class="work-aside-item">
+            <span class="num">01</span> Photography Supply Co.
+          </div>
+          <div class="work-aside-item">
+            <span class="num">02</span> HK Tailoring Studio
+          </div>
+          <div class="work-aside-item" style="color:var(--yellow);font-weight:700;">
+            <span>—</span> Pilots open
+          </div>
+        </div>
+        <p class="body-text" style="margin-top:16px;">
+          Every engagement starts with the same premise: the craft is good. The digital isn't. We fix the gap.
+        </p>
+      </div>
+    </div>
+
+    <div class="work-grid">
+      <div class="work-item work-item-aspect-1">
+        <img src="https://images.unsplash.com/photo-1502791451263-6f8e479be456?w=800&q=80" alt="Photography equipment" loading="lazy">
+        <div class="work-item-overlay">
+          <div class="work-item-title">Photography Supply Co.</div>
+          <div class="work-item-tag">Full digital glowup · HK</div>
+        </div>
+      </div>
+
+      <div class="work-item work-item-aspect-2">
+        <img src="https://images.unsplash.com/photo-1581091226825-200f23869252?w=500&q=80" alt="Tailoring work" loading="lazy">
+        <div class="work-item-overlay">
+          <div class="work-item-title">HK Tailoring Studio</div>
+          <div class="work-item-tag">IG + Funnel + Ads</div>
+        </div>
+      </div>
+
+      <div class="work-item work-item-aspect-3">
+        <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&q=80" alt="Camera lens detail" loading="lazy">
+        <div class="work-item-overlay">
+          <div class="work-item-title">The craft</div>
+          <div class="work-item-tag">Detail</div>
+        </div>
+      </div>
+
+      <div class="work-yellow-block">
+        <div class="wyb-num">03 / NEXT</div>
+        <div class="wyb-title">Your Business</div>
+        <div class="wyb-desc">Photography, tailoring, cafes, fashion, makers — HK craft businesses ready for a glowup. This could be the next case study.</div>
+        <div class="wyb-btn">Start your project →</div>
+      </div>
+    </div>
+
+    <div class="work-link-row">
+      <a href="#" class="btn-secondary" style="border-color:var(--yellow-dim);color:var(--yellow);">View all work →</a>
+      <a href="#" class="body-small" style="text-decoration:none;color:var(--muted);">Photography shop case study</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services ── -->
+<section class="section services-section" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="label">What We Do</div>
+      <h2>Four services.<br>Not fifty.</h2>
+      <p>Every engagement draws from one or more of these. We don't sell packages — we build a system around your business.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card service-card-accent">
+        <div class="service-num">01 / Core · Where most start</div>
+        <div class="service-title">Instagram Growth</div>
+        <div class="service-desc">
+          Content strategy that shows the craft. A posting rhythm that works for a small business. An account that becomes a real lead channel — not just a gallery.
+          <br><br>
+          From 200 followers to 4,200 in 8 weeks. From no online orders to 23.
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-title">Meta Ads</div>
+        <div class="service-desc">Facebook &amp; Instagram ads with a real funnel behind them. HK targeting. Creative that shows the craft.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-title">Funnels &amp; Website</div>
+        <div class="service-desc">From a scroll to a lead. Booking flows, contact capture, simple sites that do one thing well.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-title">Lead Generation</div>
+        <div class="service-desc">The whole system — content, ads, funnel — tuned to bring in the right customers. Not traffic. Customers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Split section ── -->
+<section class="section-sm" id="split" style="background:var(--navy);padding:80px 0;">
+  <div class="container">
+    <div class="split-section">
+      <div class="split-left">
+        <div class="label">Manifesto</div>
+        <h3>Most marketing advice<br>doesn't fit a workshop.</h3>
+        <p>
+          The standard playbook — viral content, engagement hacks, growth at all costs — was written for apps and consumer brands. It doesn't translate to a tailor's bench, a camera shop, a ceramic studio.
+        </p>
+      </div>
+      <div class="split-right">
+        <div>
+          <div class="label" style="color:var(--navy);margin-bottom:16px;">The process</div>
+          <ul class="sr-list">
+            <li>
+              <span class="sr-num">01</span>
+              <span class="sr-text"><strong>Audit</strong> — We look at your Instagram, your website, your booking flow. Find the gaps. Get honest about what's working.</span>
+            </li>
+            <li>
+              <span class="sr-num">02</span>
+              <span class="sr-text"><strong>Build</strong> — Rebuild the pieces that matter: content strategy, ad creative, funnel, site. Set up the system.</span>
+            </li>
+            <li>
+              <span class="sr-num">03</span>
+              <span class="sr-text"><strong>Optimize</strong> — Watch what works. Double down. Cut what doesn't. The system improves over time.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Final CTA ── -->
+<section class="final-cta" id="contact">
+  <div class="final-cta-grid"></div>
+  <div class="container final-cta-inner">
+    <div class="label">Open for pilot clients</div>
+    <h2>Got a craft business<br>that needs a glowup?</h2>
+    <p>
+      We're opening 2–3 pilot engagements this month. Photography, tailoring, cafes, fashion, makers — HK craft businesses whose digital presence doesn't match their craft.
+    </p>
+    <a href="mailto:hello@exposurelab.hk" class="final-cta-btn">
+      hello@exposurelab.hk <span class="arrow">→</span>
+    </a>
+    <div class="final-cta-note">
+      Response within 2 days · Free initial audit · HK-based
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container" style="width:100%;">
+    <div class="footer-brand">
+      EXPOSURE<span class="lab">lab</span>
+    </div>
+    <div class="footer-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#split">Process</a>
+      <a href="mailto:hello@exposurelab.hk">hello@exposurelab.hk</a>
+    </div>
+    <div class="body-small" style="color:var(--muted);">
+      © 2026 Exposure Lab · Hong Kong
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
