@@ -1,3 +1,5 @@
 .DS_Store
 *.woff2
 *.woff
+client_secret_*.json
+git-askpass.sh
