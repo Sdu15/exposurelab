@@ -1210,6 +1210,55 @@
      ══════════════════════════════════════════ */
   .reveal { opacity: 0; transform: translateY(26px); }
 
+
+  /* ══════════════════════════════════════════
+     BRAND COVER PIECES
+     ══════════════════════════════════════════ */
+  .brand-cover {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .brand-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--bg) 0%, transparent 30%, transparent 70%, var(--bg) 100%);
+    pointer-events: none;
+  }
+  .brand-cover-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .brand-cover-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 12px;
+  }
+  .brand-cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 56px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+
   /* ══════════════════════════════════════════
      RESPONSIVE
      ══════════════════════════════════════════ */
@@ -1361,7 +1410,14 @@
   <div class="reg-mark reg-mark-tl"></div>
   <div class="reg-mark reg-mark-br"></div>
   <div class="container">
-    <div class="section-head">
+    <div class="brand-cover">
+    <img src="brand_1.svg" alt="Exposure Lab brand artwork">
+    <div class="brand-cover-content">
+      <div class="brand-cover-label">Selected Work</div>
+      <div class="brand-cover-title">Two clients.<br>Two trades.<br>One system.</div>
+    </div>
+  </div>
+  <div class="section-head">
       <div>
         <span class="label">Selected Work</span>
         <h2>Two clients.<br>Two trades.<br><span class="accent">One system.</span></h2>
@@ -1477,7 +1533,14 @@
 <!-- ══ SERVICES ══ -->
 <section class="section services-section" id="services">
   <div class="container">
-    <div class="section-head">
+    <div class="brand-cover">
+    <img src="brand_2.svg" alt="Exposure Lab brand artwork">
+    <div class="brand-cover-content">
+      <div class="brand-cover-label">What We Do</div>
+      <div class="brand-cover-title">Four services.<br>Not fifty.</div>
+    </div>
+  </div>
+  <div class="section-head">
       <div>
         <span class="label">What We Do</span>
         <h2>Four services.<br>Not fifty.</h2>
@@ -1591,7 +1654,14 @@
 <!-- ══ PROOF ══ -->
 <section class="section proof-section" id="process">
   <div class="container">
-    <div class="section-head">
+    <div class="brand-cover">
+    <img src="brand_3.svg" alt="Exposure Lab brand artwork">
+    <div class="brand-cover-content">
+      <div class="brand-cover-label">How It Works</div>
+      <div class="brand-cover-title">Three steps.<br>No guesswork.</div>
+    </div>
+  </div>
+  <div class="section-head">
       <div>
         <span class="label">How It Works</span>
         <h2>Three steps.<br><span class="accent">No guesswork.</span></h2>
