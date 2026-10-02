@@ -307,6 +307,18 @@
     position: relative;
     overflow: hidden;
   }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero .container { position: relative; z-index: 1; }
   .hero-eyebrow {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -407,8 +419,19 @@
     gap: 32px;
     margin-bottom: 56px;
     padding-bottom: 30px;
-    border-bottom: 2px solid var(--text);
+    border-bottom: 1px dashed var(--border);
     flex-wrap: wrap;
+    position: relative;
+  }
+  .section-head::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--text) 0, var(--text) 8px, transparent 8px, transparent 16px);
+    opacity: 0.15;
   }
   .section-head h2 {
     font-size: clamp(34px, 5.2vw, 76px);
@@ -438,6 +461,22 @@
     background: var(--surface-2);
     aspect-ratio: 16 / 10;
     position: relative;
+  }
+  .work-row-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .work-row-media .crosshair {
+    top: 12px;
+    right: 12px;
+    z-index: 2;
   }
   .work-row-media img {
     width: 100%; height: 100%;
@@ -710,7 +749,20 @@
   .manifesto {
     background: var(--bg);
     padding: 120px 0;
+    position: relative;
   }
+  .manifesto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .manifesto .container { position: relative; z-index: 1; }
   .manifesto .label { text-align: center; margin-bottom: 34px; }
   .manifesto-text {
     font-family: var(--font-sans);
@@ -845,6 +897,18 @@
     position: relative;
     overflow: hidden;
   }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .final-cta-inner { position: relative; z-index: 1; }
   .final-cta-glow {
     position: absolute;
     top: -30%; left: 50%;
@@ -1290,35 +1354,6 @@
   </div>
 </section>
 
-<!-- ══ BRAND IDENTITY ══ -->
-<section class="section-sm" style="padding:80px 0;position:relative;">
-  <div class="reg-mark reg-mark-tl"></div>
-  <div class="reg-mark reg-mark-br"></div>
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;">
-      <span class="tech-label">Brand Identity</span>
-      <span class="asset-id">EL-2026_004</span>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;">
-      <!-- SVG Asset 4 -->
-      <div style="background:var(--surface);border:1px solid var(--border);padding:24px;display:flex;align-items:center;justify-content:center;min-height:400px;">
-        <img src="assets_brand_4.svg" alt="Exposure Lab Brand Mark" style="max-width:100%;max-height:400px;opacity:0.9;">
-      </div>
-
-      <!-- SVG Asset 5 -->
-      <div style="background:var(--surface);border:1px solid var(--border);padding:24px;display:flex;align-items:center;justify-content:center;min-height:400px;">
-        <img src="assets_brand_5.svg" alt="Exposure Lab Brand Pattern" style="max-width:100%;max-height:400px;opacity:0.9;">
-      </div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px;">
-      <span class="body-small">Brand assets · 2026</span>
-      <span class="asset-id">ASSET_ID 2026_BRAND_001</span>
-    </div>
-  </div>
-</section>
-
 <hr class="brand-divider">
 
 <!-- ══ WORK ══ -->
@@ -1345,6 +1380,7 @@
       <!-- 01 -->
       <a href="#contact" class="work-row">
         <div class="work-row-media">
+          <div class="crosshair"></div>
           <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1000&q=80" alt="Photography equipment and camera detail" loading="lazy" decoding="async">
         </div>
         <div class="work-row-body">
@@ -1381,6 +1417,7 @@
       <!-- 02 -->
       <a href="#contact" class="work-row">
         <div class="work-row-media">
+          <div class="crosshair"></div>
           <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=1000&q=80" alt="Tailoring workshop and fabric detail" loading="lazy" decoding="async">
         </div>
         <div class="work-row-body">
@@ -1404,6 +1441,7 @@
       <!-- 03 — open slot -->
       <a href="#contact" class="work-row work-row-open">
         <div class="work-row-media">
+          <div class="crosshair"></div>
           <div class="open-mark">03<br>Your<br>Business</div>
         </div>
         <div class="work-row-body">
@@ -1592,7 +1630,9 @@
       </div>
     </div>
 
-    <div class="stats-grid" style="margin-top:64px;">
+    <div class="stats-grid" style="margin-top:64px;position:relative;">
+      <div class="crosshair" style="top:8px;left:8px;"></div>
+      <div class="crosshair" style="top:8px;right:8px;"></div>
       <div class="stat-cell">
         <div class="stat-cell-num">2</div>
         <div class="stat-cell-label">Portfolio clients</div>
