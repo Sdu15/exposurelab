@@ -1217,30 +1217,39 @@
   .brand-cover {
     position: relative;
     width: 100%;
-    height: 320px;
-    overflow: hidden;
+    padding: 60px 0;
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid var(--border);
+    overflow: hidden;
   }
-  .brand-cover img {
+  .brand-cover-inner {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 0 var(--gutter);
+  }
+  .brand-cover-art {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+  .brand-cover-art img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
+    object-fit: contain;
   }
-  .brand-cover::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, var(--bg) 0%, transparent 30%, transparent 70%, var(--bg) 100%);
-    pointer-events: none;
-  }
-  .brand-cover-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
+  .brand-cover-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   .brand-cover-label {
     font-family: var(--font-mono);
@@ -1249,17 +1258,23 @@
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--text-soft);
-    margin-bottom: 12px;
   }
   .brand-cover-title {
     font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 56px);
+    font-size: clamp(32px, 4.5vw, 64px);
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    line-height: 0.95;
     color: var(--text);
   }
+  .brand-cover-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-soft);
+    max-width: 400px;
+  }
 
-  /* ══════════════════════════════════════════
+  /* ═══════════════════════════════════════════════════════════════════════════════════
      RESPONSIVE
      ══════════════════════════════════════════ */
   @media (max-width: 1080px) {
@@ -1411,10 +1426,15 @@
   <div class="reg-mark reg-mark-br"></div>
   <div class="container">
     <div class="brand-cover">
-    <img src="brand_1.svg" alt="Exposure Lab brand artwork">
-    <div class="brand-cover-content">
-      <div class="brand-cover-label">Selected Work</div>
-      <div class="brand-cover-title">Two clients.<br>Two trades.<br>One system.</div>
+    <div class="brand-cover-inner">
+      <div class="brand-cover-art">
+        <img src="brand_1.svg" alt="Exposure Lab brand artwork — EXPOSURE LAB wordmark with circular graphic">
+      </div>
+      <div class="brand-cover-text">
+        <span class="brand-cover-label">Selected Work</span>
+        <h2 class="brand-cover-title">Two clients.<br>Two trades.<br>One system.</h2>
+        <p class="brand-cover-desc">Every engagement starts from the same premise: the craft is good, the digital isn't. We close the gap.</p>
+      </div>
     </div>
   </div>
   <div class="section-head">
@@ -1534,10 +1554,15 @@
 <section class="section services-section" id="services">
   <div class="container">
     <div class="brand-cover">
-    <img src="brand_2.svg" alt="Exposure Lab brand artwork">
-    <div class="brand-cover-content">
-      <div class="brand-cover-label">What We Do</div>
-      <div class="brand-cover-title">Four services.<br>Not fifty.</div>
+    <div class="brand-cover-inner">
+      <div class="brand-cover-art">
+        <img src="brand_2.svg" alt="Exposure Lab brand artwork — HUMAN-MADE with dashed ruler lines">
+      </div>
+      <div class="brand-cover-text">
+        <span class="brand-cover-label">What We Do</span>
+        <h2 class="brand-cover-title">Four services.<br>Not fifty.</h2>
+        <p class="brand-cover-desc">Every engagement draws from one or more of these. We don't sell packages — we build one system.</p>
+      </div>
     </div>
   </div>
   <div class="section-head">
@@ -1655,10 +1680,15 @@
 <section class="section proof-section" id="process">
   <div class="container">
     <div class="brand-cover">
-    <img src="brand_3.svg" alt="Exposure Lab brand artwork">
-    <div class="brand-cover-content">
-      <div class="brand-cover-label">How It Works</div>
-      <div class="brand-cover-title">Three steps.<br>No guesswork.</div>
+    <div class="brand-cover-inner">
+      <div class="brand-cover-art">
+        <img src="brand_3.svg" alt="Exposure Lab brand artwork — circular spiral graphic">
+      </div>
+      <div class="brand-cover-text">
+        <span class="brand-cover-label">How It Works</span>
+        <h2 class="brand-cover-title">Three steps.<br>No guesswork.</h2>
+        <p class="brand-cover-desc">We start small, prove it works, then scale what's working. You see the numbers every month.</p>
+      </div>
     </div>
   </div>
   <div class="section-head">
