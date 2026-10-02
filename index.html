@@ -14,7 +14,7 @@
      TOKENS — brand identity from Figma frames
      ══════════════════════════════════════════ */
   :root {
-    --bg: #181818;
+    --bg: #191919;
     --surface: #1e1e1e;
     --surface-2: #242424;
     --text: #fffaee;
@@ -1018,6 +1018,130 @@
   }
 
   /* ══════════════════════════════════════════
+     BRAND IDENTITY — from SVG assets
+     ══════════════════════════════════════════ */
+
+  /* Dashed divider lines (blueprint ruler style) */
+  .brand-divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 0;
+  }
+
+  /* Crosshair registration mark */
+  .crosshair {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  .crosshair::before,
+  .crosshair::after {
+    content: '';
+    position: absolute;
+    background: var(--text);
+  }
+  .crosshair::before {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+  }
+  .crosshair::after {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+  }
+
+  /* Technical annotation label */
+  .tech-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-label::before {
+    content: '';
+    width: 12px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  /* Asset ID tag */
+  .asset-id {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    display: inline-block;
+  }
+
+  /* Corner registration marks */
+  .reg-mark {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+  }
+  .reg-mark::before,
+  .reg-mark::after {
+    content: '';
+    position: absolute;
+    background: var(--text);
+    opacity: 0.2;
+  }
+  .reg-mark::before {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+  }
+  .reg-mark::after {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+  }
+  .reg-mark-tl { top: 16px; left: 16px; }
+  .reg-mark-tr { top: 16px; right: 16px; }
+  .reg-mark-bl { bottom: 16px; left: 16px; }
+  .reg-mark-br { bottom: 16px; right: 16px; }
+
+  /* Subtle grid background */
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--border-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Measurement ruler ticks */
+  .ruler-ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ruler-tick {
+    width: 1px;
+    height: 6px;
+    background: var(--muted);
+    opacity: 0.4;
+  }
+  .ruler-tick.major {
+    height: 12px;
+    opacity: 0.6;
+  }
+
+  /* ══════════════════════════════════════════
      REVEAL HELPERS
      ══════════════════════════════════════════ */
   .reveal { opacity: 0; transform: translateY(26px); }
@@ -1097,6 +1221,11 @@
   </div>
 </nav>
 
+<!-- ══ BRAND DIVIDER ══ -->
+<div style="padding:0 var(--gutter);">
+  <hr class="brand-divider">
+</div>
+
 <!-- ══ MOBILE MENU ══ -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#work">Work</a>
@@ -1109,8 +1238,17 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="top">
+  <!-- Registration marks -->
+  <div class="reg-mark reg-mark-tl"></div>
+  <div class="reg-mark reg-mark-tr"></div>
+  <div class="reg-mark reg-mark-bl"></div>
+  <div class="reg-mark reg-mark-br"></div>
+
   <div class="container">
-    <div class="hero-eyebrow">Digital Marketing Studio · Hong Kong</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <span class="tech-label">Digital Marketing Studio · Hong Kong</span>
+      <span class="asset-id">EL-2026_001</span>
+    </div>
 
     <h1 class="statement hero-statement">
       Exposure Lab is a digital marketing studio built for Hong Kong's <span class="accent">craft businesses</span>.
@@ -1131,7 +1269,9 @@
       </div>
     </div>
 
-    <div class="ticker-row">
+    <hr class="brand-divider" style="margin-top:44px;">
+
+    <div class="ticker-row" style="border:none;margin-top:0;">
       <div class="ticker-item"><span>01</span>Instagram Growth</div>
       <div class="ticker-item"><span>02</span>Meta Ads</div>
       <div class="ticker-item"><span>03</span>Funnels &amp; Website</div>
@@ -1141,7 +1281,9 @@
 </section>
 
 <!-- ══ WORK ══ -->
-<section class="section work-section" id="work">
+<section class="section work-section" id="work" style="position:relative;">
+  <div class="reg-mark reg-mark-tl"></div>
+  <div class="reg-mark reg-mark-br"></div>
   <div class="container">
     <div class="section-head">
       <div>
@@ -1153,6 +1295,7 @@
           Every engagement starts from the same premise: the craft is good, the digital isn't.
           We close the gap — content, ads, funnel, site.
         </p>
+        <span class="asset-id" style="margin-top:12px;">ASSET_ID 2026_MG_990X</span>
       </div>
     </div>
 
@@ -1345,9 +1488,14 @@
 </section>
 
 <!-- ══ MANIFESTO ══ -->
-<section class="manifesto" id="manifesto">
+<section class="manifesto" id="manifesto" style="position:relative;">
+  <div class="reg-mark reg-mark-tl"></div>
+  <div class="reg-mark reg-mark-br"></div>
   <div class="container">
-    <span class="label">Manifesto</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <span class="tech-label">Manifesto</span>
+      <span class="asset-id">EL-2026_002</span>
+    </div>
     <p class="manifesto-text" id="manifestoText">
       Exposure Lab exists because most marketing advice doesn't fit a workshop. We build the bridge between real craft and the way it's sold online — <span class="hot">visible, credible, busy.</span>
     </p>
@@ -1439,10 +1587,15 @@
 </section>
 
 <!-- ══ FINAL CTA ══ -->
-<section class="final-cta" id="contact">
+<section class="final-cta" id="contact" style="position:relative;">
+  <div class="reg-mark reg-mark-tl"></div>
+  <div class="reg-mark reg-mark-br"></div>
   <div class="final-cta-glow"></div>
   <div class="container final-cta-inner">
-    <span class="label">Open for pilot clients</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <span class="tech-label">Open for pilot clients</span>
+      <span class="asset-id">EL-2026_003</span>
+    </div>
     <h2>Got a craft business<br>that needs a <span class="accent">glowup?</span></h2>
     <p>
       We're opening 2–3 pilot engagements this month for HK craft businesses whose digital
