@@ -3,3 +3,64 @@
 *.woff
 client_secret_*.json
 git-askpass.sh
+
+# ══════════════════════════════════════════════════════════════════════════
+# THIS REPO IS PUBLIC (github.com/Sdu15/exposurelab) AND ITS ROOT IS THE
+# CLOUDFLARE PAGES DEPLOY ROOT FOR hkexposurelab.com.
+#
+# Therefore: deny everything, then allow ONLY the files the website serves.
+# Anything not listed below stays private and is never deployed.
+#
+# This is deny-by-default so that a future `git add .` cannot accidentally
+# publish client work, contact lists, or private business strategy.
+# ══════════════════════════════════════════════════════════════════════════
+/*
+!.gitignore
+!.cf-rebuild
+!README.md
+
+# ── The website itself (what hkexposurelab.com serves) ──
+!index.html
+!robots.txt
+!sitemap.xml
+!llms.txt
+!*.svg
+
+# ── Explicit blocks, even if a rule above ever loosens ──
+# Client work — confidential
+marlow-bray/
+deliverables/
+work/
+
+# Contact data — real people's names, emails and phone numbers
+hk-leadgen/
+data/
+
+# Private business strategy
+client-acquisition-plan.md
+business-analysis.md
+hkstp-rehearsal-plan.md
+prep-checklist.md
+WORKSPACE.md
+
+# Third-party reference material (copyrighted, 132 MB)
+references/
+
+# Working directories
+ss/
+scripts/
+output/
+brand/
+reels/
+reel/
+motion-studio/
+my-video/
+money-reel/
+cinematic-title/
+showreel-9x16/
+waterland-redesign/
+website-builder-setup/
+Tutoring/
+"Open Design/"
+"Head talking reel refreence/"
+ClaudeAnimationBase/
