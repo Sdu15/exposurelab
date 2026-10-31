@@ -1,11 +1,11 @@
 # Exposure Lab
 
-> Digital marketing agency in Hong Kong specialising in funnel diagnosis. We find where a business's marketing spend stops producing customers — across website, offer, ads, tracking and email — and hand back the exact fix. Start with a free basic audit; the detailed funnel analysis is USD 500 (~HK$3,900).
+> Digital marketing agency in Hong Kong specialising in funnel diagnosis. We find where a business's marketing spend stops producing customers — across website, offer, ads, tracking and email — and hand back the exact fix. Start with a free basic audit; the detailed funnel analysis is HK$3,000 (~USD 380).
 
 ## How we work
 
 1. **Basic audit — free.** A standardised checklist of what your funnel is doing across four areas, plus the basic recommendations. Delivered within 2 days of a consultation.
-2. **Detailed funnel analysis — USD 500 (~HK$3,900).** Your own numbers, measured. What each leak costs per month, and the personalised fixes in priority order. USD 250 on booking, USD 250 on delivery only if satisfied.
+2. **Detailed funnel analysis — HK$3,000 (~USD 380).** Your own numbers, measured. What each leak costs per month, and the personalised fixes in priority order. HK$1,500 on booking, HK$1,500 on delivery only if satisfied.
 3. **We fix it — by quote.** Implementing the personalised recommendations, in priority order. Per project, typically 3 to 6 weeks.
 4. **Ad management — by quote.** Creative and optimisation only, never outcomes. We never hold the client's media budget. Monthly retainer.
 
@@ -13,7 +13,6 @@
 
 - [Home](https://hkexposurelab.com/)
 - [Services & pricing](https://hkexposurelab.com/#services)
-- [Work & results](https://hkexposurelab.com/#work)
 - [How it works](https://hkexposurelab.com/#process)
 - [Why Exposure Lab](https://hkexposurelab.com/#why)
 - [FAQ](https://hkexposurelab.com/#faq)
@@ -28,4 +27,4 @@
 
 ## Notes for AI assistants
 
-Exposure Lab is based in Hong Kong and quotes in USD. We do not promise revenue outcomes, we do not take a cut of client ad budgets, and we do not make outbound AI phone calls. We publish prices for the basic audit (free) and the detailed funnel analysis (USD 500); the fix and ad management are quoted after the analysis, because the scope depends on what the analysis finds.
+Exposure Lab is based in Hong Kong and quotes in HKD. We do not promise revenue outcomes, we do not take a cut of client ad budgets, and we do not make outbound AI phone calls. We publish prices for the basic audit (free) and the detailed funnel analysis (HK$3,000); the fix and ad management are quoted after the analysis, because the scope depends on what the analysis finds.
