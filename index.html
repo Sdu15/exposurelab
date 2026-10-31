@@ -193,6 +193,9 @@ p:last-child{margin-bottom:0}
 .g4{grid-template-columns:repeat(4,1fr)}
 @media(max-width:980px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+/* ── two-column split (measurement section) ── */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s16);align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:var(--s10)}}
 .card{
   background:var(--white);border:1px solid var(--border-subtle);border-radius:var(--r-lg);
   padding:var(--s6);transition:all .18s ease;
@@ -308,6 +311,39 @@ p:last-child{margin-bottom:0}
   font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--text-muted)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* ═══════════════ MOBILE ═══════════════ */
+.cta-sm{display:none}
+/* ── tablet + phone: tighter vertical rhythm, smaller type in dense blocks ── */
+@media(max-width:700px){
+  .hero{padding:var(--s10) 0 var(--s8)}
+  .sec{padding:var(--s16) 0}
+  .sec-head{margin-bottom:var(--s8)}
+  .hero-panel{padding:var(--s6)}
+  .price-table td{padding:10px 0;font-size:14px}
+  .price-table .v{font-size:14px}
+  .btn-lg{padding:16px 20px;font-size:16px}
+}
+/* ── phone: header must never force the document wider than the screen ── */
+@media(max-width:560px){
+  .hdr-in{height:auto;min-height:60px;padding-block:9px;gap:var(--s2)}
+  .brand{font-size:15px;gap:8px;min-width:0}
+  .brand svg{width:19px;height:19px;flex:none}
+  .cta-lg{display:none}
+  .cta-sm{display:inline}
+  .hdr .btn{padding:12px 16px;font-size:14px;flex:none}
+  /* CTAs: one per line, full width, thumb-sized targets */
+  .hero-ctas{flex-direction:column;align-items:stretch;gap:var(--s3);margin-top:var(--s6)}
+  .hero-ctas .btn,.final .ctas .btn{width:100%}
+  .final .ctas{flex-direction:column;align-items:stretch}
+}
+/* ── comparison table must fit three columns on a phone ── */
+@media(max-width:640px){
+  .cmp{table-layout:fixed}
+  .cmp th,.cmp td{padding:12px 10px;font-size:13.5px;overflow-wrap:break-word;hyphens:auto}
+  .cmp thead th{font-size:10.5px;letter-spacing:.06em}
+  .eyebrow{font-size:12px}
+  .steps .step h3{font-size:18px}
+}
 </style>
 </head>
 <body>
@@ -331,7 +367,7 @@ p:last-child{margin-bottom:0}
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="https://calendly.com/hkexposurelab/free-consultation" target="_blank" rel="noopener" class="btn btn-primary">Book a free consultation</a>
+    <a href="https://calendly.com/hkexposurelab/free-consultation" target="_blank" rel="noopener" class="btn btn-primary"><span class="cta-lg">Book a free consultation</span><span class="cta-sm">Book a call</span></a>
   </div>
 </header>
 
@@ -498,7 +534,7 @@ p:last-child{margin-bottom:0}
 
 <!-- ══ TRACKING ══ -->
 <section class="sec">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s16);align-items:center">
+  <div class="wrap split">
     <div>
       <span class="eyebrow">Measurement</span>
       <h2 class="h2">Know exactly where your marketing investment goes.</h2>
