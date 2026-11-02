@@ -238,6 +238,24 @@ p{margin:0 0 var(--s4)}p:last-child{margin-bottom:0}
   border-radius:var(--r-md);padding:13px 16px;font-size:14.5px;color:var(--text)}
 .half-band b{color:var(--text)}
 .half-band .hb-dot{width:8px;height:8px;border-radius:50%;background:var(--cta);flex:0 0 auto}
+/* ── sticky round strip with a live countdown (reference pattern) ── */
+.roundstrip{position:sticky;top:72px;z-index:55;background:var(--midnight);color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.14)}
+.roundstrip-in{display:flex;align-items:center;gap:var(--s3);min-height:46px;padding:9px var(--s6);
+  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+.roundstrip .rs-dot{width:8px;height:8px;border-radius:50%;background:var(--cta);flex:0 0 auto}
+.roundstrip .rs-text{color:rgba(255,255,255,.82)}
+.roundstrip b{color:#fff}
+.roundstrip .rs-cd{color:var(--blue-50);margin-left:6px}
+.roundstrip .rs-cta{margin-left:auto;color:#fff;font-weight:600;white-space:nowrap;
+  border-bottom:1px solid rgba(255,255,255,.4)}
+.roundstrip .rs-cta:hover{color:var(--blue-50);border-color:var(--blue-50)}
+@media(max-width:700px){
+  .roundstrip{position:static}
+  .roundstrip-in{font-size:11.5px;letter-spacing:.04em;gap:var(--s2);min-height:42px}
+  .roundstrip .rs-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .roundstrip .rs-cd{margin-left:0}
+}
 </style>
 </head>
 <body>
@@ -258,6 +276,16 @@ p{margin:0 0 var(--s4)}p:last-child{margin-bottom:0}
     <a href="https://calendly.com/exposurelabshk/free-audit" class="btn btn-primary">Book the audit</a>
   </div>
 </header>
+
+<div class="roundstrip">
+  <div class="wrap roundstrip-in">
+    <span class="rs-dot"></span>
+    <span class="rs-text">Next audit round closes <b>Fri 13 Nov</b> <span class="rs-cd" id="round-countdown"></span></span>
+    <a href="free-audit.html" class="rs-cta">Get the checklist →</a>
+  </div>
+</div>
+
+
 
 <section class="hero" id="top">
   <div class="wrap hero-grid">
@@ -523,5 +551,21 @@ HK$1,500 on delivery, only if satisfied. Based in Hong Kong, serving established
   </div>
 </footer>
 
+<script>
+
+// live countdown to the round close (reference funnel pattern)
+(function () {
+  var target = new Date("2026-11-13T23:59:59+08:00").getTime();
+  var el = document.getElementById('round-countdown');
+  function tick() {
+    var d = target - Date.now();
+    if (!el) return;
+    if (d <= 0) { el.textContent = '· closed for this round'; return; }
+    var days = Math.floor(d / 864e5), hrs = Math.floor(d % 864e5 / 36e5), mins = Math.floor(d % 36e5 / 6e4);
+    el.textContent = '· ' + days + 'd ' + hrs + 'h ' + mins + 'm left';
+  }
+  tick(); setInterval(tick, 30000);
+})();
+</script>
 </body>
 </html>

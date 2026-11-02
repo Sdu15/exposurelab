@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Exposure Lab//Free funnel audit//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:free-audit-2026-11-13@hkexposurelab.com
+DTSTAMP:20261102T000000Z
+DTSTART;TZID=Asia/Hong_Kong:20261113T090000
+DTEND;TZID=Asia/Hong_Kong:20261113T093000
+SUMMARY:Exposure Lab — your free 4-point funnel audit
+DESCRIPTION:Your free 4-point audit (website\, offer\, ads\, tracking) and the basic fixes. If it has not landed by today\, reply to the confirmation email and we will chase it. Exposure Lab\, Hong Kong — hello@hkexposurelab.com
+LOCATION:Hong Kong
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Free 4-point funnel audit — Exposure Lab
+END:VALARM
+END:VEVENT
+END:VCALENDAR
