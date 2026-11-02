@@ -21,6 +21,7 @@ git-askpass.sh
 
 # ── The website itself (what hkexposurelab.com serves) ──
 !index.html
+!detailed-audit.html
 !robots.txt
 !sitemap.xml
 !llms.txt
