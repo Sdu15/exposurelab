@@ -211,24 +211,6 @@ p{margin:0 0 var(--s4)}p:last-child{margin-bottom:0}
 .half-band .hb-dot{width:8px;height:8px;border-radius:50%;background:var(--cta);flex:0 0 auto}
 .half-band a{font-weight:600;white-space:nowrap}
 @media(max-width:560px){.half-band{font-size:14.5px;padding:13px 15px}}
-/* ── sticky round strip with a live countdown (reference pattern) ── */
-.roundstrip{position:sticky;top:72px;z-index:55;background:var(--midnight);color:#fff;
-  border-bottom:1px solid rgba(255,255,255,.14)}
-.roundstrip-in{display:flex;align-items:center;gap:var(--s3);min-height:46px;padding:9px var(--s6);
-  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
-.roundstrip .rs-dot{width:8px;height:8px;border-radius:50%;background:var(--cta);flex:0 0 auto}
-.roundstrip .rs-text{color:rgba(255,255,255,.82)}
-.roundstrip b{color:#fff}
-.roundstrip .rs-cd{color:var(--blue-50);margin-left:6px}
-.roundstrip .rs-cta{margin-left:auto;color:#fff;font-weight:600;white-space:nowrap;
-  border-bottom:1px solid rgba(255,255,255,.4)}
-.roundstrip .rs-cta:hover{color:var(--blue-50);border-color:var(--blue-50)}
-@media(max-width:700px){
-  .roundstrip{position:static}
-  .roundstrip-in{font-size:11.5px;letter-spacing:.04em;gap:var(--s2);min-height:42px}
-  .roundstrip .rs-text{white-space:nowrap;overflow:hidden}
-  .roundstrip .rs-cd{display:none}
-}
 /* step 2: the three qualifying questions */
 .survey{margin-top:var(--s6);padding-top:var(--s5);border-top:1px solid var(--border);text-align:left}
 .survey .line{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -261,21 +243,13 @@ p{margin:0 0 var(--s4)}p:last-child{margin-bottom:0}
   </div>
 </header>
 
-<div class="roundstrip">
-  <div class="wrap roundstrip-in">
-    <span class="rs-dot"></span>
-    <span class="rs-text">Next audit round closes <b>Fri 13 Nov</b> <span class="rs-cd" id="round-countdown"></span></span>
-    <a href="#audit" class="rs-cta">Get the checklist →</a>
-  </div>
-</div>
-
 
 
 <!-- hero: light, exactly the site's hero rhythm -->
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="round-note"><span class="dot"></span> Next audit round closes Fri 13 Nov</span>
+      <span class="round-note"><span class="dot"></span> Free 4-point audit · written reply within 2 days</span>
       <span class="eyebrow">Free · 4-point funnel audit</span>
       <h1 class="h1">Find the one leak that is costing you customers — before you spend another dollar.</h1>
       <p class="lede">A standardised 4-point funnel audit for established Hong Kong businesses already
@@ -438,7 +412,7 @@ p{margin:0 0 var(--s4)}p:last-child{margin-bottom:0}
 <!-- final cta: the site's dark close -->
 <section class="final">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--blue-50)">Open for the next round</span>
+    <span class="eyebrow" style="color:var(--blue-50)">Start with the free audit</span>
     <h2 class="h2">Got a funnel that leaks?</h2>
     <p>Send two fields and get the free 4-point audit within two days — with the one thing we would fix
     first. If it is worth going deeper, the detailed audit is HK$3,000.</p>
