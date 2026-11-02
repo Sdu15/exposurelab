@@ -324,6 +324,13 @@ p:last-child{margin-bottom:0}
   .btn-lg{padding:16px 20px;font-size:16px}
 }
 /* ── phone: header must never force the document wider than the screen ── */
+/* highlighted 50/50 payment band */
+.half-band{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:var(--s4);
+  background:var(--blue-05);border:1px solid var(--blue-10);border-left:4px solid var(--cta);
+  border-radius:var(--r-md);padding:13px 16px;font-size:14.5px;color:var(--text)}
+.half-band b{color:var(--text)}
+.half-band .hb-dot{width:8px;height:8px;border-radius:50%;background:var(--cta);flex:0 0 auto}
+
 @media(max-width:560px){
   .hdr-in{height:auto;min-height:60px;padding-block:9px;gap:var(--s2)}
   .brand{font-size:15px;gap:8px;min-width:0}
@@ -381,7 +388,7 @@ p:last-child{margin-bottom:0}
       find that gap — across your website, offer, ads, tracking and email — and hand you the
       exact fix, in writing.</p>
       <div class="hero-ctas">
-        <a href="https://calendly.com/exposurelabshk/free-audit" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a free consultation <span class="arrow">→</span></a>
+        <a href="free-audit.html" class="btn btn-primary btn-lg">Get your free audit checklist <span class="arrow">→</span></a>
       </div>
       <p class="hero-note">Free 4-point funnel audit first · reply within 2 days</p>
     </div>
@@ -401,6 +408,8 @@ p:last-child{margin-bottom:0}
       </table>
       <p style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-top:var(--s5)">
         ~USD 380 · <a href="detailed-audit.html">what the detailed audit covers →</a></p>
+      <p class="half-band"><span class="hb-dot"></span> <b>Detailed audit: pay half now.</b> HK$1,500
+        on booking, the second HK$1,500 only on delivery — and only if you are satisfied.</p>
     </aside>
   </div>
 </section>
@@ -420,7 +429,7 @@ p:last-child{margin-bottom:0}
         <h3 class="h3">Free 4-point audit</h3>
         <p>A standardised 4-point audit of what your funnel is doing across website, offer, ads and
         tracking — plus the basic recommendations we would make to anyone with those findings.</p>
-        <div class="price">Free · within 2 days</div>
+        <div class="price">Free · within 2 days · <a href="free-audit.html">get the checklist →</a></div>
       </div>
       <div class="card">
         <span class="num">02 · HK$3,000</span>
@@ -706,8 +715,8 @@ p:last-child{margin-bottom:0}
     going deeper, the detailed audit is HK$3,000, split HK$1,500 on booking and HK$1,500 on
     delivery.</p>
     <div class="ctas">
-      <a href="https://calendly.com/exposurelabshk/free-audit" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a free consultation <span class="arrow">→</span></a>
-      <a href="#faq" class="btn btn-ghost btn-lg">Read the FAQ</a>
+      <a href="free-audit.html" class="btn btn-primary btn-lg">Get your free audit checklist <span class="arrow">→</span></a>
+      <a href="https://calendly.com/exposurelabshk/free-audit" class="btn btn-ghost btn-lg">Book a call instead</a>
     </div>
     <p class="note">hello@hkexposurelab.com · or book directly above · HK-based</p>
   </div>
@@ -747,6 +756,7 @@ established Hong Kong businesses.</p>
           <li><a href="#services">The fix</a></li>
           <li><a href="#services">Ads management</a></li>
           <li><a href="#services">Tracking &amp; attribution</a></li>
+          <li><a href="free-audit.html">Free audit checklist</a></li>
           <li><a href="detailed-audit.html">Detailed funnel audit — HK$3,000</a></li>
         </ul>
       </div>
