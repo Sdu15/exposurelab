@@ -311,6 +311,41 @@ p:last-child{margin-bottom:0}
   font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--text-muted)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ── free-audit form (hero here, /free-audit.html dark variant) ── */
+.lead-form-wrap{margin-top:var(--s8);max-width:660px}
+.lf-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+.lf-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.lead-form label{font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-muted)}
+.lead-form input[type=email],.lead-form input[type=text]{
+  width:100%;font-family:var(--font-sans);font-size:16px;color:var(--text);background:var(--white);
+  border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 16px;
+  transition:border-color .18s ease,box-shadow .18s ease}
+.lead-form input::placeholder{color:var(--light-grey)}
+.lead-form input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(66,127,224,.16)}
+.lead-form input[aria-invalid="true"]{border-color:var(--cta);box-shadow:0 0 0 3px rgba(255,82,84,.13)}
+.lf-err{margin:0;font-size:13px;font-weight:600;line-height:1.35;color:var(--cta)}
+.lf-err[hidden]{display:none}
+.lf-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;
+  opacity:0!important;pointer-events:none}
+.lead-form .btn{margin-top:var(--s5)}
+.lf-micro{margin-top:var(--s4);font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;
+  color:var(--text-muted)}
+.lf-global{margin:var(--s4) 0 0;font-size:14.5px;font-weight:600;line-height:1.45;color:var(--cta)}
+.lf-global:empty{display:none}
+.lf-global a{color:inherit;text-decoration:underline}
+.lead-done{background:var(--blue-05);border:1px solid var(--blue-10);border-left:4px solid var(--cta);
+  border-radius:var(--r-lg);padding:var(--s6)}
+.lead-done[hidden]{display:none}
+.lead-done .big{font-size:var(--fs-body-lg);font-weight:var(--fw-bold);color:var(--text);
+  margin-bottom:var(--s3)}
+.lead-done p{font-size:15px;color:var(--text-muted);margin:0}
+.lead-done b{color:var(--text)}
+@media(max-width:700px){
+  .lf-row{grid-template-columns:1fr;gap:var(--s4)}
+  .lead-form .btn{width:100%}
+}
 /* ═══════════════ MOBILE ═══════════════ */
 .cta-sm{display:none}
 /* ── tablet + phone: tighter vertical rhythm, smaller type in dense blocks ── */
@@ -353,7 +388,7 @@ p:last-child{margin-bottom:0}
 }
 </style>
 </head>
-<body>
+<body data-form-context="landing page">
 
 <!-- ══ HEADER ══ -->
 <header class="hdr">
@@ -374,7 +409,7 @@ p:last-child{margin-bottom:0}
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="free-audit.html" class="btn btn-primary"><span class="cta-lg">Get the free audit</span><span class="cta-sm">Free audit</span></a>
+    <a href="#free-audit" class="btn btn-primary"><span class="cta-lg">Get the free audit</span><span class="cta-sm">Free audit</span></a>
   </div>
 </header>
 
@@ -387,10 +422,34 @@ p:last-child{margin-bottom:0}
       <p class="lede">Most firms lose customers in the gap between the click and the sale. We
       find that gap — across your website, offer, ads, tracking and email — and hand you the
       exact fix, in writing.</p>
-      <div class="hero-ctas">
-        <a href="free-audit.html" class="btn btn-primary btn-lg">Get your free audit checklist <span class="arrow">→</span></a>
+      <!-- the one ask: an email + the site to look at, right here -->
+      <div class="lead-form-wrap" id="free-audit">
+        <form class="lead-form" id="audit-form" novalidate>
+          <div class="lf-row">
+            <div class="lf-field">
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email"
+                     placeholder="you@yourbusiness.hk" required>
+              <p class="lf-err" data-for="email" role="alert" hidden></p>
+            </div>
+            <div class="lf-field">
+              <label for="site">Your website (or Instagram)</label>
+              <input id="site" name="site" type="text" autocomplete="url"
+                     placeholder="yourbusiness.hk" required>
+              <p class="lf-err" data-for="site" role="alert" hidden></p>
+            </div>
+          </div>
+          <input class="lf-hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary btn-lg" type="submit">Get your free audit <span class="arrow">→</span></button>
+          <p class="lf-micro">Free 4-point audit · written reply within 2 days · no pitch, no retainer</p>
+          <p class="lf-global" id="audit-global" role="alert"></p>
+        </form>
+        <div class="lead-done" id="audit-done" hidden>
+          <div class="big">Audit on its way.</div>
+          <p>We will send the 4-point audit to <b id="audit-done-email">you</b> within two days — with
+          the one thing we would fix first. Nothing else happens unless you reply.</p>
+        </div>
       </div>
-      <p class="hero-note">Free 4-point funnel audit first · reply within 2 days</p>
     </div>
 
     <aside class="hero-panel">
@@ -407,7 +466,7 @@ p:last-child{margin-bottom:0}
         <tr><td class="k">— on delivery, if satisfied</td><td class="v">HK$1,500</td></tr>
       </table>
       <p style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-top:var(--s5)">
-        ~USD 380 · <a href="detailed-audit.html">what the detailed audit covers →</a></p>
+        ~USD 380 · <a href="/detailed-audit">what the detailed audit covers →</a></p>
       <p class="half-band"><span class="hb-dot"></span> <b>Detailed audit: pay half now.</b> HK$1,500
         on booking, the second HK$1,500 only on delivery — and only if you are satisfied.</p>
     </aside>
@@ -429,14 +488,14 @@ p:last-child{margin-bottom:0}
         <h3 class="h3">Free 4-point audit</h3>
         <p>A standardised 4-point audit of what your funnel is doing across website, offer, ads and
         tracking — plus the basic recommendations we would make to anyone with those findings.</p>
-        <div class="price">Free · within 2 days · <a href="free-audit.html">get the checklist →</a></div>
+        <div class="price">Free · within 2 days · <a href="/free-audit">get the checklist →</a></div>
       </div>
       <div class="card">
         <span class="num">02 · HK$3,000</span>
         <h3 class="h3">Detailed funnel audit</h3>
         <p>The same areas, but measured against your own numbers. What each leak is costing you per
         month, and the personalised fixes in priority order.</p>
-        <div class="price">HK$3,000 · ~USD 380 · <a href="detailed-audit.html">what is inside →</a></div>
+        <div class="price">HK$3,000 · ~USD 380 · <a href="/detailed-audit">what is inside →</a></div>
       </div>
       <div class="card">
         <span class="num">03 · By quote</span>
@@ -510,7 +569,7 @@ p:last-child{margin-bottom:0}
       <div class="step">
         <h3 class="h3">Detailed audit — HK$3,000</h3>
         <p>We go into your own numbers and quantify what each leak costs you per month. A written
-        report with the personalised fixes, in priority order. <a href="detailed-audit.html">What is inside the detailed audit →</a></p>
+        report with the personalised fixes, in priority order. <a href="/detailed-audit">What is inside the detailed audit →</a></p>
       </div>
       <div class="step">
         <h3 class="h3">We fix it — by quote</h3>
@@ -715,7 +774,7 @@ p:last-child{margin-bottom:0}
     going deeper, the detailed audit is HK$3,000, split HK$1,500 on booking and HK$1,500 on
     delivery.</p>
     <div class="ctas">
-      <a href="free-audit.html" class="btn btn-primary btn-lg">Get your free audit checklist <span class="arrow">→</span></a>
+      <a href="#free-audit" class="btn btn-primary btn-lg">Get your free audit <span class="arrow">→</span></a>
       <a href="https://calendly.com/exposurelabshk/free-audit" class="btn btn-ghost btn-lg">Book a call instead</a>
     </div>
     <p class="note">hello@hkexposurelab.com · or book directly above · HK-based</p>
@@ -756,8 +815,8 @@ established Hong Kong businesses.</p>
           <li><a href="#services">The fix</a></li>
           <li><a href="#services">Ads management</a></li>
           <li><a href="#services">Tracking &amp; attribution</a></li>
-          <li><a href="free-audit.html">Free audit checklist</a></li>
-          <li><a href="detailed-audit.html">Detailed funnel audit — HK$3,000</a></li>
+          <li><a href="/free-audit">Free audit checklist</a></li>
+          <li><a href="/detailed-audit">Detailed funnel audit — HK$3,000</a></li>
         </ul>
       </div>
       <div>
@@ -777,5 +836,6 @@ established Hong Kong businesses.</p>
   </div>
 </footer>
 
+<script src="audit-form.js" defer></script>
 </body>
 </html>

@@ -23,11 +23,18 @@ git-askpass.sh
 !index.html
 !detailed-audit.html
 !free-audit.html
+!audit-form.js
 !audit-reminder.ics
 !robots.txt
 !sitemap.xml
 !llms.txt
 !*.svg
+
+# ── Cloudflare Pages Functions (the /api/audit intake endpoint) ──
+!functions/
+!functions/**
+# secrets for local `wrangler pages dev` — never deployed, never committed
+.dev.vars
 
 # ── Explicit blocks, even if a rule above ever loosens ──
 # Client work — confidential
