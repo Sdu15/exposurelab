@@ -23,11 +23,17 @@ git-askpass.sh
 !index.html
 !detailed-audit.html
 !free-audit.html
+!privacy.html
+!terms.html
+!404.html
 !audit-form.js
+!site.js
+!site.css
 !audit-reminder.ics
 !robots.txt
 !sitemap.xml
 !llms.txt
+!og-image.png
 !*.svg
 
 # ── Cloudflare Pages Functions (the /api/audit intake endpoint) ──

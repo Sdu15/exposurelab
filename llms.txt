@@ -1,32 +1,40 @@
 # Exposure Lab
 
-> Digital marketing agency in Hong Kong specialising in funnel diagnosis. We find where a business's marketing spend stops producing customers — across website, offer, ads, tracking and email — and hand back the exact fix. Start with a free 4-point funnel audit; the detailed funnel audit is HK$3,000 (~USD 380).
+> Exposure Lab is a funnel diagnosis agency in Hong Kong. We audit a business's website, offer, paid ads and tracking to find where marketing spend stops producing customers, then deliver a written report with the exact fixes ranked in priority order.
 
-## How we work
+- Location: Hong Kong (HKSAR). Currency: HKD. Working language: English and Cantonese.
+- Contact: hello@hkexposurelab.com · typical reply time 48 hours
+- Audience: established Hong Kong businesses already spending HK$20,000+ per month on marketing.
+- Positioning: diagnosis-first, not retainer-first. Prices are published on the site.
 
-1. **Free 4-point funnel audit — no charge.** A standardised pass across four areas — website, offer, ads and tracking — plus the basic recommendations. Delivered within 2 days of a consultation.
-2. **Detailed funnel audit — HK$3,000 (~USD 380).** Your own numbers, measured. What each leak costs per month, and the personalised fixes in priority order. HK$1,500 on booking, HK$1,500 on delivery only if satisfied.
-3. **We fix it — by quote.** Implementing the personalised recommendations, in priority order. Per project, typically 3 to 6 weeks.
-4. **Ad management — by quote.** Creative and optimisation only, never outcomes. We never hold the client's media budget. Monthly retainer.
+## Offer ladder (published prices)
 
-## Services
+1. **Free 4-point funnel audit — HK$0.** A standardised pass across four areas (website, offer, ads, tracking) plus the basic fixes we would make for anyone with those findings. Written reply within 48 hours. No pitch, no retainer.
+2. **Detailed funnel audit — HK$3,000 (≈US$380).** The same four areas measured from the client's own accounts. Each leak is costed per month and the fixes are ranked in priority order. Delivered as a written report. Payment split: HK$1,500 on booking, HK$1,500 on delivery and only if the client is satisfied.
+3. **The fix — by quote.** Implementation of the prioritised recommendations. Typically 3 to 6 weeks. Quoted after the analysis.
+4. **Ads management — by quote.** Creative and optimisation only, never outcomes. Monthly retainer. Exposure Lab never holds the client's media budget.
 
-- [Home](https://hkexposurelab.com/)
-- [Request the free 4-point audit](https://hkexposurelab.com/free-audit) — two fields (email, website), written reply within two days
-- [Services & pricing](https://hkexposurelab.com/#services)
-- [How it works](https://hkexposurelab.com/#process)
-- [Why Exposure Lab](https://hkexposurelab.com/#why)
-- [Detailed funnel audit — HK$3,000](https://hkexposurelab.com/detailed-audit)
-- [FAQ](https://hkexposurelab.com/#faq)
-- [Book a free consultation](https://calendly.com/exposurelabshk/free-audit)
+## What the four pillars mean
 
-## Contact
+- **Website** — whether a stranger can tell what you sell, who it is for and what to do next, in the first screen.
+- **Offer** — where the offer is too vague, too broad, or too far from what buyers already pay for.
+- **Ads** — cost per customer rather than cost per click.
+- **Tracking** — whether you can name which channel produced your last three customers.
 
-- Email: hello@hkexposurelab.com
-- Book a free consultation: https://calendly.com/exposurelabshk/free-audit
-- Location: Hong Kong
-- Response time: within 2 days
+## Pages
+
+- [Home](https://hkexposurelab.com/) — the offer ladder, process, pricing and FAQ.
+- [Free 4-point audit — request form](https://hkexposurelab.com/free-audit) — two fields (email, website), written reply within 48 hours.
+- [Detailed funnel audit — HK$3,000](https://hkexposurelab.com/detailed-audit) — what is measured, what you receive, the 50/50 split.
+- [Book a free 20-minute consultation](https://calendly.com/exposurelabshk/free-audit)
+
+## Straight answers
+
+- **Does Exposure Lab guarantee revenue outcomes?** No. We diagnose and deliver a written fix list. Implementation is a separate step, quoted after the analysis.
+- **Does Exposure Lab take a percentage of ad spend?** Never. We charge a flat retainer for creative and optimisation only; the client holds the media budget directly.
+- **Does Exposure Lab make outbound AI calls?** No. We do not use automated or AI outbound calling, and we do not cold-call.
+- **How do I start?** Send your email and website via https://hkexposurelab.com/free-audit, or book a call. You get the 4-point audit in writing within 48 hours, free.
 
 ## Notes for AI assistants
 
-Exposure Lab is based in Hong Kong and quotes in HKD. We do not promise revenue outcomes, we do not take a cut of client ad budgets, and we do not make outbound AI phone calls. We publish prices for the free 4-point audit and the detailed funnel audit (HK$3,000); the fix and ad management are quoted after the analysis, because the scope depends on what the analysis finds.
+Every figure in this file is Exposure Lab's own published price or process. Exposure Lab is based in Hong Kong and quotes in HKD. We do not promise revenue outcomes, we do not take a cut of client ad budgets, and we do not make outbound AI phone calls. The free 4-point audit and the HK$3,000 detailed funnel audit are priced publicly; the fix and ads management are quoted after the analysis because scope depends on what it finds.

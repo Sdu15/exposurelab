@@ -1,5 +1,10 @@
 /* Free-audit form — client-side validation + POST /api/audit.
-   Shared by index.html (hero) and free-audit.html. No dependencies. */
+   Shared by index.html and /free-audit. No dependencies.
+
+   Selector-tolerant on purpose: it works with both the current markup
+   (#email-error / #site-error / #form-success / #success-email / #form-status)
+   and the older one (.lf-err[data-for] / #audit-done / #audit-done-email /
+   #audit-global), so a future template tweak can't silently kill feedback. */
 (function () {
   'use strict';
 
@@ -9,27 +14,34 @@
   var emailEl = form.querySelector('#email');
   var siteEl = form.querySelector('#site');
   var button = form.querySelector('button[type="submit"]');
-  var globalEl = document.getElementById('audit-global');
-  var doneEl = document.getElementById('audit-done');
-  var doneEmail = document.getElementById('audit-done-email');
+  var statusEl = byId('form-status', 'audit-global');
+  var doneEl = byId('form-success', 'audit-done');
+  var doneEmail = byId('success-email', 'audit-done-email');
   var wrap = document.getElementById('free-audit') || form;
+  var sending = false;
+
+  function byId() {
+    for (var i = 0; i < arguments.length; i++) {
+      var el = document.getElementById(arguments[i]);
+      if (el) return el;
+    }
+    return null;
+  }
 
   // Same rules as functions/api/audit.js — the server is the authority,
   // this only saves the visitor a round trip.
   var EMAIL_RE = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,24}$/;
   var DOMAIN_RE = /^(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,24}(?:\/\S*)?$/;
   var HANDLE_RE = /^@?[a-z0-9](?:[a-z0-9._-]{1,58})[a-z0-9]$/;
-  var DISPOSABLE = [
-    'mailinator.com', 'guerrillamail.com', 'sharklasers.com', 'grr.la', '10minutemail.com',
-    'tempmail.com', 'temp-mail.org', 'throwawaymail.com', 'yopmail.com', 'trashmail.com',
-    'getnada.com', 'maildrop.cc', 'dispostable.com', 'fakeinbox.com', 'mailnesia.com'
-  ];
+  var DISPOSABLE = ['mailinator.com', 'guerrillamail.com', 'sharklasers.com', 'grr.la',
+    '10minutemail.com', 'tempmail.com', 'temp-mail.org', 'throwawaymail.com', 'yopmail.com',
+    'trashmail.com', 'getnada.com', 'maildrop.cc', 'dispostable.com', 'fakeinbox.com', 'mailnesia.com'];
 
   var COPY = { email: 'email', site: 'site' };
   var errors = {};
 
   function errNode(field) {
-    return form.querySelector('.lf-err[data-for="' + field + '"]');
+    return byId(field + '-error') || form.querySelector('.lf-err[data-for="' + field + '"]');
   }
 
   function setError(field, message) {
@@ -37,18 +49,20 @@
     var input = form.querySelector('#' + COPY[field]);
     if (message) {
       errors[field] = message;
-      if (node) { node.textContent = message; node.hidden = false; }
+      if (node) { node.textContent = message; node.hidden = false; node.classList.add('visible'); }
       if (input) input.setAttribute('aria-invalid', 'true');
     } else {
       delete errors[field];
-      if (node) { node.textContent = ''; node.hidden = true; }
+      if (node) { node.textContent = ''; node.hidden = true; node.classList.remove('visible'); }
       if (input) input.removeAttribute('aria-invalid');
     }
   }
 
-  function setGlobal(message) {
-    if (!globalEl) return;
-    globalEl.innerHTML = message || '';
+  function setStatus(message) {
+    if (!statusEl) return;
+    statusEl.innerHTML = message || '';
+    statusEl.classList.toggle('visible', !!message);
+    statusEl.style.display = message ? 'block' : '';
   }
 
   function checkEmail(raw) {
@@ -78,7 +92,7 @@
   function validate() {
     setError('email', checkEmail(emailEl && emailEl.value));
     setError('site', checkSite(siteEl && siteEl.value));
-    setGlobal('');
+    setStatus('');
     var first = Object.keys(errors)[0];
     if (first) {
       var input = form.querySelector('#' + COPY[first]);
@@ -96,7 +110,7 @@
     });
     input.addEventListener('input', function () {
       if (errors[field]) setError(field, null);
-      setGlobal('');
+      setStatus('');
     });
   });
 
@@ -104,15 +118,19 @@
     if (doneEmail) doneEmail.textContent = email;
     if (doneEl) {
       doneEl.hidden = false;
+      doneEl.style.display = 'block';
       form.hidden = true;
+      form.style.display = 'none';
       if (wrap.scrollIntoView) wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
-      setGlobal('Audit on its way \u2014 we will reply to ' + email + ' within two days.');
+      // No success panel in this template: say it in the status line instead.
+      setStatus('Audit on its way \u2014 we will reply to ' + email + ' within 48 hours.');
     }
   }
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+    if (sending) return;
     if (!validate()) return;
 
     var email = String(emailEl.value).trim().toLowerCase();
@@ -133,17 +151,25 @@
     };
 
     var label = button ? button.innerHTML : '';
+    sending = true;
     if (button) {
       button.disabled = true;
       button.setAttribute('aria-busy', 'true');
       button.textContent = 'Sending\u2026';
     }
-    setGlobal('');
+    setStatus('');
+
+    // Never leave the visitor staring at a spinner: give up after 15s.
+    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (controller) controller.abort(); }, 15000);
+    var late = false;
+    setTimeout(function () { if (sending) { late = true; setStatus('Still working on it\u2026'); } }, 6000);
 
     fetch('/api/audit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: controller ? controller.signal : undefined
     })
       .then(function (res) {
         return res.json().catch(function () { return {}; }).then(function (data) {
@@ -158,20 +184,15 @@
           if (input) input.focus();
           return;
         }
-        if (r.data.ok) {
-          showDone(email);
-          return;
-        }
-        setGlobal(
-          'Something went wrong on our side. Email <a href="mailto:hello@hkexposurelab.com?subject=Free%20audit%20request">hello@hkexposurelab.com</a> and we will pick it up straight away.'
-        );
+        if (r.data.ok) { showDone(email); return; }
+        setStatus('Something went wrong on our side. Email <a href="mailto:hello@hkexposurelab.com?subject=Free%20audit%20request">hello@hkexposurelab.com</a> and we will pick it up straight away.');
       })
       .catch(function () {
-        setGlobal(
-          'No connection to our server. Email <a href="mailto:hello@hkexposurelab.com?subject=Free%20audit%20request">hello@hkexposurelab.com</a> and we will pick it up straight away.'
-        );
+        setStatus('No connection to our server. Email <a href="mailto:hello@hkexposurelab.com?subject=Free%20audit%20request">hello@hkexposurelab.com</a> and we will pick it up straight away.');
       })
       .then(function () {
+        clearTimeout(timer);
+        sending = false;
         if (button) {
           button.disabled = false;
           button.removeAttribute('aria-busy');
